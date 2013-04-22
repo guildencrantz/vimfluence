@@ -5,9 +5,9 @@ package main;
 
 use strict;
 use warnings;
-use Net::Netrc;
-use File::Temp qw( mkstemps );
 use Digest::MD5 qw( md5_hex );
+use File::Temp qw( mkstemps );
+use Net::Netrc;
 use URI::Split qw( uri_split uri_join );
 
 
@@ -109,15 +109,16 @@ package Confluence;
 
 use strict;
 use warnings;
+use Cwd qw( abs_path );
 use File::Spec::Functions qw( catdir );
 use File::Basename qw( dirname );
 
-use constant confluence_path => catdir(dirname(__FILE__), "externals/confluence-cli");
+use constant confluence_path => catdir(dirname(abs_path(__FILE__)), "externals/confluence-cli");
 
 sub new {
   my $proto = shift;
   my ($server, $login, $password) = @_;
-  
+
   return bless { server        => $server
                , login         => $login
                , password      => $password
